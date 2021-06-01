@@ -1,4 +1,7 @@
+from dbdb import insert_data
 from flask import Flask, render_template, request
+import dbdb # 내가 만든 데이터베이스 함수들
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -45,8 +48,9 @@ def action_page():
     else:
      #여기 POST로 들어오는 데이터를 받아보자
      email =  request.form['email']
-     password =  request.form['pwd']
+     password =  request.form['password']
      print("전달된값:",email, password)
+     insert_data(email,password)
      return "회원가입 데이터(POST)"
 
 
@@ -59,7 +63,7 @@ def login():
     else:
      #여기 POST로 들어오는 데이터를 받아보자
       email =  request.form['email']
-      password =  request.form['pwd']
+      password =  request.form['password']
       print("전달된값:",email, password)
       if email ==  'a@a.com' and password == '1234':
        return("로그인 성공")
